@@ -1,0 +1,9 @@
+# Kahsolt
+# 2019-01-12
+
+该项目使用Python2
+源项目地址：https://github.com/SnakeHacker/QA-Snake
+
+0.启动运行： python QA/server.py
+1.本包非运行时文件已被精简删除
+2.QA/server.py有少量改动

@@ -1,0 +1,19 @@
+# CIBot
+[pip3]
+  django
+  apscheduler
+  requests
+  socket
+  gensim
+  nltk
+
+# QA-Snake
+[pip2]
+  jieba
+  aiml
+  lxml
+  beautifulsoup4
+
+# wxbot
+[pip2]
+  pyqrcode

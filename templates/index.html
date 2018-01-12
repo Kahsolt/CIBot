@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <meta http-equiv="content-type" content="text/html; charset=utf8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="{% static "w3.css" %}" />
+  <script type="text/javascript" src="{% static "jquery.js" %}"></script>
+  <script type="text/javascript" src="{% static "app.js" %}"></script>
+
+  <title>CIBot Project</title>
+</head>
+
+<body>
+
+<nav class="w3-sidebar w3-bar-block w3-blue w3-card" style="width:150px">
+  {# 站点logo #}
+  <a href="/">
+    <h3 class="w3-bar-item w3-center">CIBot</h3>
+  </a>
+  {# 功能菜单 #}
+  <div class="w3-bar-item w3-button tablink" onclick="app.ui.openMenu(event, 'menuMy')">用户 ▼</div>
+  <div id="menuMy" class="w3-hide w3-white w3-card-4">
+    {# 未登录时菜单 #}
+    <div id="menuUnlogin" style="display: block">
+      <a href="#" class="w3-bar-item w3-button tablink" onclick="app.ui.openTab(event, 'tabLogin')">登录</a>
+      <a href="#" class="w3-bar-item w3-button tablink" onclick="app.ui.openTab(event, 'tabRegister')">注册</a>
+    </div>
+    {# 登录后菜单 #}
+    <div id="menuLogin" style="display: none">
+      <a href="#" class="w3-bar-item w3-button tablink" onclick="app.ui.openTab(event, 'tabHome')">个人中心</a>
+      <a href="#" class="w3-bar-item w3-button" onclick="app.http.logout()">注销</a>
+    </div>
+  </div>
+  <button class="w3-bar-item w3-button tablink" onclick="app.ui.openTab(event, 'tabQuestion')">我要提问？</button>
+  <button class="w3-bar-item w3-button tablink" onclick="app.ui.openTab(event, 'tabAnswer')">我要回答！</button>
+</nav>
+
+<section style="margin-left:150px">
+  {# Banner - 消息提醒框 #}
+  <div id="msgNotice" class="w3-container w3-opacity" onclick="$(this).hide();" style="display:none; cursor: pointer">
+    <p>Kion vi pova fari poste?</p>
+  </div>
+
+  {# Tab - 功能页 #}
+  <div id="tabWelcome" class="w3-container w3-animate-opacity tabcontent" style="display:block">
+    <div id="formLogin" class="w3-container w3-display-middle w3-center">
+      <div class="w3-text-blue w3-jumbo">CI-Bot</div>
+      <h3 class="w3-text-blue">Saluton, tiu nubo-inteligenteca roboto estas~</h3>
+      <hr/>
+      <p>显然，这只是一个乏味的欢迎消息而已～</p>
+    </div>
+  </div>
+
+  <div id="tabLogin" class="w3-container w3-animate-opacity tabcontent" style="display:none">
+    <div id="formLogin" class="w3-container w3-display-middle w3-center">
+      <h2 class="w3-text-blue">登录</h2>
+      <hr/>
+      <p>
+        <label class="w3-text-blue">
+          <b>用户名</b>
+          <input class="w3-input w3-border w3-validate" name="username" type="text" required="required" />
+        </label>
+      </p>
+      <p>
+        <button class="w3-btn w3-blue" onclick="app.http.login()">登录</button>
+      </p>
+    </div>
+  </div>
+
+  <div id="tabRegister" class="w3-container w3-animate-opacity tabcontent" style="display:none">
+    <div id="formRegister" class="w3-container w3-display-middle w3-center" style="max-width: 300px;">
+      <h2 class="w3-text-blue">注册</h2>
+      <hr/>
+      <p>
+        <label class="w3-text-blue">
+          <b>用户名</b>
+          <input class="w3-input w3-border w3-validate" name="username" type="text" required="required" />
+        </label>
+      </p>
+      <p id="pTags">
+        <label class="w3-text-blue">
+          <b>兴趣领域(多选)</b>
+          <input class="w3-input w3-border w3-validate" name="tags" type="text" required="required" />        </label>
+        <br/> {# VACANT for js #}
+      </p>
+      <p>
+        <button class="w3-btn w3-blue" onclick="app.http.register()">注册</button>
+      </p>
+    </div>
+  </div>
+
+  <div id="tabHome" class="w3-container w3-animate-opacity tabcontent" style="display:none">
+    <h2 class="w3-text-blue">个人中心</h2>
+    <div id="divUserinfo" class="w3-text-blue"></div>
+  </div>
+
+  <div id="tabQuestion" class="w3-container w3-animate-opacity tabcontent" style="display:none">
+    <h2 class="w3-text-blue">我要提问？</h2>
+    <div id="divChatConsole" class="w3-container w3-border w3-border-blue" style="min-height: 420px; max-height: 500px; max-width: 700px;">
+      <p>Jen ankoraux ne problemo.. Gi estos reala bona!!</p>
+      <p>Kial vi prenas ke la homoj devas demandi demandoj, cxu ne?!</p>
+      <br/>
+      <p>Cxi tiu konzolo devu rezemblas babilejo :)</p>
+    </div>
+    <div id="formQuestion">
+      <button class="w3-btn w3-blue" style="width: 120px;" onclick="app.http.question()">Ask!</button>
+      <input class="w3-input w3-border w3-border-red  w3-show-inline-block" style="max-width: 500px;" type="text" placeholder="Iu ajn demando, sinjoro?"
+      />
+    </div>
+  </div>
+
+  <div id="tabAnswer" class="w3-container w3-animate-opacity tabcontent" style="display:none">
+    <h2 class="w3-text-blue">我要回答！</h2>
+    <div id="divTaskPool" class="w3-container w3-border w3-border-green" style="height: 480px;">
+      {# 一行四个 #}
+      <div class="w3-row-padding w3-margin-top">
+
+        <div class="w3-quarter w3-container w3-hover-opacity" onclick="app.ui.openTaskModal(this)" style="cursor: pointer;">
+          <header class="w3-container w3-red">
+            <h5>这是个问题</h5>
+          </header>
+          <div class="w3-container w3-border w3-border-grey">
+            <p>问题啊啊啊啊啊啊啊啊</p>
+            <p>问题啊啊啊啊啊啊啊啊</p>
+          </div>
+        </div>
+
+        <div class="w3-quarter w3-container w3-hover-opacity" onclick="app.ui.openTaskModal(this)" style="cursor: pointer;">
+          <header class="w3-container w3-light-blue">
+            <h5>这真的是个问题</h5>
+          </header>
+          <div class="w3-container w3-border w3-border-grey">
+            <p>Lorem ipsum啊啊啊啊喂</p>
+            <p>Lorem ipsum啊啊啊啊喂</p>
+            <p>Lorem ipsum啊啊啊啊喂</p>
+          </div>
+        </div>
+
+        <div class="w3-quarter w3-container w3-hover-opacity" onclick="app.ui.openTaskModal(this)" style="cursor: pointer;">
+          <header class="w3-container w3-yellow">
+            <h5>前端到底怎么写美工啊啊啊</h5>
+          </header>
+          <div class="w3-container w3-border w3-border-grey">
+            <p>fxck！！</p>
+            <p>fxck！！</p>
+            <p>fxck！！</p>
+            <p>fxck！！</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="w3-row-padding w3-margin-top">
+
+        <div class="w3-quarter w3-container w3-hover-opacity" onclick="app.ui.openTaskModal(this)" style="cursor: pointer;">
+          <header class="w3-container w3-black">
+            <h5>这是其他问题</h5>
+          </header>
+          <div class="w3-container w3-border w3-border-grey">
+            <p>Mi reale malsxatas cxi tiu larobo!!!</p>
+            <p>Bonvolu demandu cxtiu faras tion.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    {# 这应该是个公用模态框，用于回答问题 #}
+    <div id="modalTask" class="w3-modal w3-animate-opacity">
+      <div class="w3-modal-content w3-card-4" style="width: 500px">
+        <header class="w3-container w3-teal">
+          <span onclick="$('#modalTask').hide()" class="w3-button w3-large w3-display-topright">&times;</span>
+          <h2>问题简述</h2>
+        </header>
+        <div class="w3-container">
+          <p>Tis estas cxefa teksto</p>
+          <p>Some text..</p>
+          <p>Yet more..</p>
+          <p>and more..</p>
+          <p>and more..</p>
+          <p>and more..</p>
+          <p>and more..</p>
+          <p>and more..</p>
+        </div>
+        <footer class="w3-container w3-teal">
+          我的答案：
+          <input class="w3-input w3-show-inline-block w3-border w3-border-green" style="width: 55%" type="text" placeholder="Iu ajn demando, sinjoro?"
+          />
+          <button class="w3-btn w3-green" style="width: 120px;" onclick="app.http.answer()">Answer!</button>
+        </footer>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="w3-display-bottomright w3-hide">
+    <p>Stupidly powered by Kahsolt 2017-11-04@BUAA</p>
+  </footer>
+
+</section>
+
+</body>
+
+</html>

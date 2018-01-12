@@ -1,0 +1,13 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django Logs
+log/*.log*
+
+# DB related
+app/migrations
+db.sqlite3
+db.sqlite3.bak
+

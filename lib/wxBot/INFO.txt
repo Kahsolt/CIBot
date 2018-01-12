@@ -1,0 +1,10 @@
+# Kahsolt
+# 2019-01-12
+
+该项目使用Python2
+源项目地址：https://github.com/liuwons/wxBot
+
+0.启动运行： python wxbot_adapter.py
+1.本包非运行时文件已被精简删除，其余源码未改动
+2.增加文件wxbot_adapter.py作为前端启动脚本
+

@@ -1,0 +1,27 @@
+[Django工程部分]
+  manage.py	# Dj管理脚本
+  CIBot		# Dj工程配置包
+  app		# Dj应用包
+    migrations		# 数据库迁移配置(自动管理)
+    urls.py		# 路由层
+    views.py	# 视图层
+    utils		# 业务逻辑工具包
+    models		# 模型层包
+    test.py
+    scheds.py
+    apps.py
+    admin.py
+  templates	# 视图模板层
+  static	# 静态资源
+  log		# 日志
+  db.sqlite3	# 数据库文件
+
+[额外内容]
+  bin		# 适合*nix的语法糖脚本
+  lib		# 第三方库
+  doc		# 开发文档等
+  .gitignore	# Git配置
+  README.md
+  LICENSE
+  DEPENDENCIES
+  STRUCTURE

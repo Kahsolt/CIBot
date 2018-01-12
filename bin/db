@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+# Author: kahsolt
+# Date: 2017-11-05
+#
+
+CIBOT=$(dirname $(cd `dirname $0`; pwd))
+PY3='/usr/bin/python3'
+
+function migrate() {
+  STEPS=2
+
+  echo "[Step: 1/${STEPS}] Django: makemigrations app"
+  $PY3 $CIBOT/manage.py makemigrations
+  $PY3 $CIBOT/manage.py makemigrations app
+  echo
+
+  echo "[Step: 2/${STEPS}] Django: migrate"
+  $PY3 $CIBOT/manage.py migrate
+  $PY3 $CIBOT/manage.py migrate app
+  echo
+}
+
+function hardreset() {
+  STEPS=5
+
+  echo "[Step: 1/${STEPS}] Shell: backup db.sqlite3"
+  mv $CIBOT/db.sqlite3 db.sqlite3.bak
+  echo
+
+  echo "[Step: 2/${STEPS}] Shell: rm -r /app/migrations"
+  rm -r $CIBOT/app/migrations
+  echo
+
+  echo "[Step: 3/${STEPS}] Django: makemigrations app"
+  $PY3 $CIBOT/manage.py makemigrations
+  $PY3 $CIBOT/manage.py makemigrations app
+  echo
+
+  echo "[Step: 4/${STEPS}] Django: migrate app"
+  $PY3 $CIBOT/manage.py migrate
+  $PY3 $CIBOT/manage.py migrate app
+  echo
+
+  echo "[Step: 5/${STEPS}] Django: createsuperuser"
+  echo "for Django-Admin app use, url='http://<ip>[:port]/admin'"
+  echo "Out of convention we set username='cibot', please input your password"
+  $PY3 $CIBOT/manage.py createsuperuser --username cibot --email cibot@lab.kahsolt.tk
+  echo
+}
+
+case "$1" in
+  migrate|m)
+    migrate
+    ;;
+  hardreset|hr)
+    echo -n "WARN: changes could HARDLY undo [yN]: "
+    read confirm
+    if [[ "$confirm" = "Y" || "$confirm" = "y" ]]; then
+      hardreset
+    else
+      echo "Give up :)"
+    fi
+    ;;
+  *)
+    # echo "Shortcut script for Django migrations, you can also souce this in your shell."
+    echo "Usage: `basename $0` migrate/hardreset"
+    ;;
+esac
