@@ -7,7 +7,7 @@ from .Keyword import Keyword
 
 # [问题] ->[用户] & =>{问题关键词} & <=[答案]
 class Question(models.Model):
-    qid = models.CharField(primary_key=True, unique=True, null=False, max_length=128, help_text='问题唯一标识')
+    qid = models.AutoField(primary_key=True, unique=True, null=False, max_length=128, help_text='问题唯一标识')
     user = models.ForeignKey(User, blank=True, null=True, help_text='题主', on_delete=models.CASCADE)
     content = models.TextField(help_text='问题内容')
     date = models.TextField(help_text='提问时间')
@@ -18,13 +18,13 @@ class Question(models.Model):
     keywords = models.ManyToManyField('Keyword', help_text='问题关键字')
     answers = models.ManyToManyField('Answer', help_text='答案')
 
-    create_time = models.DateTimeField(auto_now_add=True,null=True)
+    create_time = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return '[%s] %s' % (self.user and self.user.username or 'Anonymous', self.content[:10])
+        return '[%s] %s' % (self.qid or 'Anonymous', self.content[:10])
 
     @classmethod
-    def find_alike(cls,ques):
+    def find_alike(cls, ques):
         keywords=ques['keywords']
         key_list=keywords.split(' ')
         for word in key_list:
@@ -51,7 +51,8 @@ class Question(models.Model):
     @classmethod
     def import_file(self,dist):
         #p, created = Keyword.objects.get(name = dist['keywords'])
-        q = Question(qid = dist['qid'], content = dist['content'], date = dist['date'], keys = dist['keywords'], resdate = dist['resdate'], votdate = dist['votdate'], lastdate = dist['lastdate'])
+        q = Question(qid = dist['qid'], content = dist['content'], date = dist['date'], keys = dist['keywords'],
+                     resdate = dist['resdate'], votdate = dist['votdate'], lastdate = dist['lastdate'])
         q.save()
         #q.keywords.add(p)
         return q

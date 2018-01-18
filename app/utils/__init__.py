@@ -83,7 +83,7 @@ def qa_dispatcher(data):
         q = Question.objects.create(content=quest)  # for anonymous
     # q.keywords.add()
     # q.save()
-    logger.info('[Q] new quest, qid=%d', q.id)
+    # logger.info('[Q] new quest, qid=%d', q.id)
 
     # dispatch SE
     # TODO: try to ASYNC this part!!

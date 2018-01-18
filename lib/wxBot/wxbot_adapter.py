@@ -56,7 +56,9 @@ class QaBot(WXBot):
             if resp.get('answer'):
                 qid = resp.get('qid')
                 answer = resp.get('answer')
-                print('[A-AI] Bot answered [#%d]: %s' % (qid, answer[:30]))
+                # print('this is a test message:')
+                # print(resp)
+                # print('[A-AI] Bot answered [#%d]: %s' % (qid, answer[:30]))
                 reply = u'问题[#%d]的答案: \n%s' % (qid, answer)
                 self.send_msg_by_uid(reply, uid)
             elif resp.get('helpers'):
@@ -112,8 +114,8 @@ class QaBot(WXBot):
             data['users'].append(u)
         f = open('user.list', 'w+')
         import json
-        data=json.dumps(data)
-        # print(data)
+        data = json.dumps(data)
+        print(data)
 
         f.write(str(json.loads(data)))
         f.flush()
