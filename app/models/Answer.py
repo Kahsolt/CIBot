@@ -1,3 +1,4 @@
+#encoding: utf-8
 from django.db import models
 from .User import User
 from .Question import Question
@@ -5,8 +6,8 @@ from .Question import Question
 
 # [答案] ->[用户]|[问题]
 class Answer(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, help_text='答主|为空时意为搜索引擎')
-    qid = models.ForeignKey(Question, help_text='对应的问题')
+    user = models.ForeignKey(User, null=True, blank=True, help_text='答主|为空时意为搜索引擎',on_delete=models.CASCADE)
+    qid = models.ForeignKey(Question, help_text='对应的问题',on_delete=models.CASCADE)
     content = models.TextField(help_text='答案内容')
     isBest = models.BooleanField(help_text='是否最佳')
     grade = models.PositiveSmallIntegerField(blank=True, default=3, help_text='评分1-5')

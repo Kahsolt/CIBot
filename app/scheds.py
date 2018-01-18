@@ -1,3 +1,4 @@
+#encoding: utf-8
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.models import *
 

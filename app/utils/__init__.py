@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import json
 import socket
 import logging
@@ -76,6 +77,7 @@ def qa_dispatcher(data):
     # Save Question
     try:
         u = User.objects.get(id=data.get('uid'))
+        print("pass")
         q = Question.objects.create(user=u, content=quest)
     except:
         q = Question.objects.create(content=quest)  # for anonymous
@@ -128,7 +130,7 @@ def response_write(jsonData):
 def json_load(byteData):
     try:
         strData = isinstance(byteData, bytes) and byteData.decode('utf8') or byteData
-        # logger.info('Raw Data: %s' % strData)
+        logger.info('Raw Data: %s' % strData)
         jsonData = json.loads(strData, encoding='utf8', parse_int=int, parse_float=float)
         logger.info('Received Json Data: %s' % jsonData)
         return jsonData

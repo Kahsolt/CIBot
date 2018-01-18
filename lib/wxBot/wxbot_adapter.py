@@ -112,7 +112,10 @@ class QaBot(WXBot):
             data['users'].append(u)
         f = open('user.list', 'w+')
         import json
-        f.write(json.loads(data))
+        data=json.dumps(data)
+        # print(data)
+
+        f.write(str(json.loads(data)))
         f.flush()
         f.close()
         try:

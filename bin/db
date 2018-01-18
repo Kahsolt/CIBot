@@ -4,7 +4,7 @@
 #
 
 CIBOT=$(dirname $(cd `dirname $0`; pwd))
-PY3='/usr/bin/python3'
+PY3='python3'
 
 function migrate() {
   STEPS=2

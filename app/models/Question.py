@@ -1,3 +1,4 @@
+#encoding: utf-8
 from django.db import models
 from .User import User
 from .Keyword import Keyword
@@ -7,7 +8,7 @@ from .Keyword import Keyword
 # [问题] ->[用户] & =>{问题关键词} & <=[答案]
 class Question(models.Model):
     qid = models.CharField(primary_key=True, unique=True, null=False, max_length=128, help_text='问题唯一标识')
-    user = models.ForeignKey(User, blank=True, null=True, help_text='题主')
+    user = models.ForeignKey(User, blank=True, null=True, help_text='题主', on_delete=models.CASCADE)
     content = models.TextField(help_text='问题内容')
     date = models.TextField(help_text='提问时间')
     resdate = models.TextField(help_text='解决时间')

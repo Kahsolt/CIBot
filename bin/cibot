@@ -8,23 +8,23 @@ CIBOT_HOME=$(dirname $(cd `dirname $0`; pwd))
 QASNAKE_HOME="${CIBOT_HOME}/lib/QA-Snake"
 WXBOT_HOME="${CIBOT_HOME}/lib/wxBot"
 
-SH=`which bash`
-PY2=`which python`
-PY3=`which python3`
+SH='bash'
+PY2='python'
+PY3='python3'
 
 case "$1" in
     start)
         cd $QASNAKE_HOME
         screen -dmS QA-Snake $PY2 QA/server.py
-		# cd $WXBOT_HOME
-		# screen -dmS wxBot $PY2 wxbot_adapter.py
+		cd $WXBOT_HOME
+		screen -dmS wxBot $PY2 wxbot_adapter.py
         cd $CIBOT_HOME
         screen -dmS Django-CIBot $PY3 manage.py runserver
         sleep 1
         screen -list
         ;;
     stop)
-        # screen -S wxBot -X kill
+        screen -S wxBot -X kill
         screen -S Django-CIBot -X kill
         screen -S QA-Snake -X kill
         sleep 1

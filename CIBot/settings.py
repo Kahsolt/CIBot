@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 """
 Django settings for CIBot project.
 
@@ -186,3 +187,7 @@ LIB_DIR = os.path.join(BASE_DIR, 'lib')     # 请以这个变量为lib目录根
 
 WORD2VEC_PATH = os.path.join(LIB_DIR, 'Word2vec/wiki_model.txt')
 WORD2VEC_MODEL = gensim.models.word2vec.Word2Vec.load(WORD2VEC_PATH)
+
+# QA-Snake
+QASNAKE_HOST = '127.0.0.1'
+QASNAKE_PORT = 50000

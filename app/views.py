@@ -1,3 +1,4 @@
+#encoding: utf-8
 import datetime
 
 from django.shortcuts import redirect, render, resolve_url
@@ -103,7 +104,9 @@ def tag(request):
 @csrf_exempt
 def q(request):
     try:
+
         data = json_load(request.body)
+
         resp = qa_dispatcher(data)
         return response_write({'answer': resp})
     except:

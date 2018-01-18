@@ -1,3 +1,4 @@
+#encoding: utf-8
 from .Answer import Answer
 from .Keyword import Keyword
 from .Question import Question
