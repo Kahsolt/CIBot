@@ -1,8 +1,11 @@
 from gensim import models,corpora,similarities
-import logging,linecache
 #load model & data
-import logging,nltk,re
-
+import logging,nltk,re,linecache,jieba,jieba.analyse
+import os,django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CIBot.settings")
+django.setup()
+import json
+from app.models import Answer,Question,User,Keyword
 
 def get_uri(input_content,top = 5):
     ques_corpus = dictionary.doc2bow(input_content.split())
@@ -31,7 +34,7 @@ class Myquestions(object):
 def tfidf_model():
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-    sentences = Myquestions('F:\\full_subject_id.txt')
+    sentences = Myquestions('/home/lusong/PycharmProjects/CIBot_clean/data/raw_data')
     dict = corpora.Dictionary(sentences)
     dict.save('dict_tfidf_stop')
     corpus = [dict.doc2bow(text) for text in sentences]
@@ -39,7 +42,6 @@ def tfidf_model():
 
     tfidf = models.TfidfModel(corpus, dict, normalize=False)
     tfidf.save('tfidf_question_stop.model')
-
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
