@@ -2,6 +2,8 @@
 import aiml
 import os, sys
 
+sys.path.append('/home/lusong/PycharmProjects/CIBot_clean/lib/QA-Snake')
+
 from QA.QACrawler import baike
 from QA.Tools import Html_Tools as QAT
 from QA.Tools import TextProcess as T

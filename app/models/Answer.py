@@ -38,6 +38,7 @@ class Answer(models.Model):
         a = Answer.objects.get_or_create(qid = q, content=dist['bestanswer'], isBest=True)
         #a.question0.add(q)
         return a
+
     @classmethod
     def importXml(self, dist, item):
         q = Question.objects.get(qid = dist['qid'])

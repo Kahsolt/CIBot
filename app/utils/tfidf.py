@@ -1,6 +1,7 @@
 from gensim import models,corpora,similarities
 import logging,linecache
 #load model & data
+import logging,nltk,re
 
 
 def get_uri(input_content,top = 5):
@@ -16,6 +17,29 @@ def get_uri(input_content,top = 5):
         res.append(raw[0])
 
     return res
+
+class Myquestions(object):
+    def  __init__(self,dirname):
+        self.dirname = dirname
+
+    def __iter__(self):
+        for line in open(self.dirname,'r',encoding='utf-8'):
+            sentence_stop = [i for i in line.lower().split() if i not in set(nltk.corpus.stopwords.words('english'))
+                             and not re.search('%%%%%',i)]
+            yield sentence_stop
+
+def tfidf_model():
+    logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+
+    sentences = Myquestions('F:\\full_subject_id.txt')
+    dict = corpora.Dictionary(sentences)
+    dict.save('dict_tfidf_stop')
+    corpus = [dict.doc2bow(text) for text in sentences]
+    corpora.MmCorpus.serialize('corpus_stop.mm', corpus)
+
+    tfidf = models.TfidfModel(corpus, dict, normalize=False)
+    tfidf.save('tfidf_question_stop.model')
+
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -46,3 +70,13 @@ while(True):
     # for items in n_best_ans:
     #     print('问题编号：',items[0],'相似度：',items[1])
     #     print(linecache.getline('F:\\full_subject_id.txt',items[0]+1))
+
+# def main():
+    # bot = QaBot()
+    # bot.DEBUG = True
+    # bot.conf['qr'] = 'tty'  # use terminal instead of 'png'
+    # bot.run()
+
+
+# if __name__ == '__main__':
+#     main()

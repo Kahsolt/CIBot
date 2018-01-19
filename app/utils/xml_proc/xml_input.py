@@ -8,6 +8,7 @@ from app.models.Question import Question
 from app.models.Keyword import Keyword
 from app.models.User import User
 
+
 #直接在路径下用命令行输入python xml_input.py运行导入
 
 # dist = load_db.importFile("xml_proc/small_sample.xml")#输入xml文件路径

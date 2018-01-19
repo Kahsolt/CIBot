@@ -21,7 +21,7 @@ class User(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '[%d]: %s' %(self.id, self.username)
+        return '[%s]: %s' %(self.uid, self.username)
 
     def to_json(self):
         return {

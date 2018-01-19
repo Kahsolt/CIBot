@@ -18,13 +18,21 @@ from app.scheds import *
 @csrf_exempt
 def user(request):
     try:
-        uid = request.session.get('uid')
-        u = User.objects.get(id=uid)
-        if u:
-            RtUser.objects.get(user=User.objects.get(id=uid)).hello_time = datetime.datetime.now()
-            return response_write(u.to_json())
-        else:
-            return response_write(die(404))
+        us = request.body
+        us = eval(json_load(us))
+        us = us['users']
+        for u in us:
+            uid = u['id']
+            uname = u['nickname']
+            u = User.objects.get_or_create(uid=uid, username = uname)
+
+        # uid = request.session.get('id')
+        # u = User.objects.get_or_create(uid=uid)
+        # if u:
+        #     RtUser.objects.get_or_create(user=User.objects.get(uid=uid)).hello_time = datetime.datetime.now()
+        #     return response_write(u.to_json())
+        # else:
+        #     return response_write(die(404))
     except:
         return response_write(die(401))
 
