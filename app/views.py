@@ -1,5 +1,6 @@
 #encoding: utf-8
 import datetime
+import re
 
 from django.shortcuts import redirect, render, resolve_url
 from django.views.decorators.csrf import csrf_exempt
@@ -18,13 +19,24 @@ from app.scheds import *
 @csrf_exempt
 def user(request):
     try:
+        User.objects.filter(uid = r'^@').delete()
+        Tag.object.filter(name = 'doctor').delete()
+        Tag.object.filter(name = 'patient').delete()
+    except:
+        pass
+    try:
+        Tag.object.get_or_create(name = 'doctor')
+        Tag.object.get_or_create(name = 'patient')
         us = request.body
         us = eval(json_load(us))
         us = us['users']
         for u in us:
             uid = u['id']
             uname = u['nickname']
-            u = User.objects.get_or_create(uid=uid, username = uname)
+            if 'doctor' in uid:
+                u = User.objects.get_or_create(uid=uid, username = uname, tags = Tag.object.get(name = 'doctor'))
+            else:
+                u = User.objects.get_or_create(uid=uid, username=uname, tags=Tag.object.get(name='patient'))
 
         # uid = request.session.get('id')
         # u = User.objects.get_or_create(uid=uid)

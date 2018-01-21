@@ -110,6 +110,12 @@ class QaBot(WXBot):
             u'gender': 0,
         }
         data['users'].append(u)
+        u = {
+            u'id': 'doctor0',
+            u'nickname': 'doctor0',
+            u'gender': 0,
+        }
+        data['users'].append(u)
         for u in self.contact_list:
             u = {
                 u'id': u.get('UserName'),
@@ -128,7 +134,8 @@ class QaBot(WXBot):
         try:
             requests.post(url=URL_USER, json=data)
             print('[Contact] Sent %d contacts info :)' % len(data['users']))
-        except:
+        except Exception as e:
+            print(e)
             print('[Contact] You live alone on the island, uha? :(')
 
     def send_question(self, uid, quest):
