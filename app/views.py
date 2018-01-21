@@ -126,7 +126,6 @@ def a(request):
 
         data = json_load(request.body)
         resp = qa_callback(data)
-        print('uid is '+resp)
         return response_write({'uid': resp})
     except:
         return response_write(die(000))

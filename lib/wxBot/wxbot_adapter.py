@@ -75,7 +75,7 @@ class QaBot(WXBot):
             def parse(text):
                 i = 0
                 while i < len(text):
-                    if text[i] not in [str(digit) for digit in range(9)]:
+                    if text[i] not in [str(digit) for digit in range(10)]:
                         break
                     i += 1
                 try:
@@ -93,7 +93,10 @@ class QaBot(WXBot):
                 self.send_msg_by_uid(reply, uid)
             else:
                 print('[A-CI] %s answered [#%d]: %s' % (username, qid, answer[:30]))
-                self.send_answer(uid, qid, answer)
+                resp = self.send_answer(uid, qid, answer)
+                if resp.get('uid'):
+                    reply = answer
+                    self.send_msg_by_uid(reply, resp.get('uid'))
 
     def send_contact_book(self):
         data = {'users': []}

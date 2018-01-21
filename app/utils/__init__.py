@@ -139,10 +139,9 @@ def qa_callback(data):
         uid = data.get('uid')
         Answer.update_answerlist(data)
         uid = Question.get_uid_byqid(qid)
-        print("hereB" + uid)
         return uid
     except Exception as e:
-        print(e.message)
+        print(e)
     return
 
 # Section B 语法糖 Wrapper
