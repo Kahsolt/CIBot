@@ -8,6 +8,7 @@ from django.conf import settings
 from django.shortcuts import HttpResponse
 from CIBot.settings import QASNAKE_HOST, QASNAKE_PORT
 from app.models import *
+from utils.tfidfcn import tfidf_search
 
 logger = logging.getLogger("django")
 
@@ -93,8 +94,13 @@ def qa_dispatcher(data):
     # t = threading.Thread(target=qa_snake, args=(data.get('question'),))
     # t.setDaemon(True)
     # t.start()
-    #To do:是否有类似问题？
-    #if not
+    # Todo:是否有类似问题？
+
+    # res = tfidf_search()
+    # if (res == ''): #未找到
+    #     print("数据库中不存在相似答案")
+    # else: #找到答案,返回res为答案内容,格式为字符串
+    #     print(res)
     
     snake_re = qa_snake(data.get('question'))
     #
@@ -115,9 +121,6 @@ def qa_dispatcher(data):
 
     return resp
 
-
-
-
 def qa_snake(kw):
     try:
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -130,7 +133,6 @@ def qa_snake(kw):
     except Exception as e:
         print(e)
         return None
-
 
 # Section B 语法糖 Wrapper
 def response_write(jsonData):

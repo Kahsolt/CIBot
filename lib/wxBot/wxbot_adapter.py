@@ -20,6 +20,10 @@ URL_Q = URL_BASE + '/q'
 URL_A = URL_BASE + '/a'
 
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 class QaBot(WXBot):
     def __init__(self):
         WXBot.__init__(self)
