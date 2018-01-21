@@ -64,6 +64,8 @@ def find_user(que):
 
         for i in range(len(user_list)):
             print(user_list[i].username + " " + str(cout_list[i]))
+        if len(user_list)>0:
+            return user_list
     except Exception as e:
         print(e)
     print("over~")
@@ -75,9 +77,10 @@ def qa_dispatcher(data):
         return ''
     #to do：判断q是否存在
     # Save Question
+    print("cibot get the question:"+quest)
     try:
-        u = User.objects.get(id=data.get('uid'))
-        print("pass")
+        print("cibot get the uid:" + data.get('uid'))
+        u = User.objects.get(uid=data.get('uid'))
         q = Question.objects.create(user=u, content=quest)
     except:
         q = Question.objects.create(content=quest)  # for anonymous
@@ -90,20 +93,27 @@ def qa_dispatcher(data):
     # t = threading.Thread(target=qa_snake, args=(data.get('question'),))
     # t.setDaemon(True)
     # t.start()
-    resp = find_user(data.get('question'))
-    if resp:
-        pass
-    resp = qa_snake(data.get('question'))
-    if resp:
-        return resp
     #To do:是否有类似问题？
     #if not
+    
+    snake_re = qa_snake(data.get('question'))
+    #
+    if snake_re.get('founded'):
+        resp = {'qid':q.qid,'answer':snake_re.get('answer')}
+        return resp
+    else:
+        print("qa_snake give no answer")
+        users = find_user(data.get('question'))
+        if users :
+            resp = {'qid':q.qid,'answer':snake_re.get('answer'),'user':users}
+        else:
+            resp = {'qid': q.qid, 'answer': snake_re.get('answer')}
 
     # dispatch local-DB
 
     # dispatch CI
 
-    return '<No ans in QA-Snake>'
+    return resp
 
 
 
@@ -117,7 +127,8 @@ def qa_snake(kw):
         ans = client.recv(4096).decode('utf8')
         logger.info('[QA-Snake] %s...' % ans[:30])
         return ans
-    except:
+    except Exception as e:
+        print(e)
         return None
 
 

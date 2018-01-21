@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 # print sys.path
 
 QASNAKE_HOST = '127.0.0.1'
-QASNAKE_PORT = 5000
+QASNAKE_PORT = 50000
 
 from QA.QACrawler import baike
 from QA.Tools import Html_Tools as QAT
@@ -95,6 +95,9 @@ if __name__ == '__main__':
                 ans = mybot.respond('找不到答案')
                 print 'Eric：' + ans
                 reply = mybot.respond('找不到答案')
+
+                #yang @2018.1.20
+                reply = {'answer':reply,'founded':false}
                 conn.send(reply)
 
             # 百科搜索
@@ -132,6 +135,9 @@ if __name__ == '__main__':
                     ans = mybot.respond('找不到答案')
                     print 'Eric：' + ans
                     reply = ans
+
+                    # yang @2018.1.20
+                    reply = {'answer':reply,'founded':true}
                     conn.send(reply)
 
                 elif len(ans) >1:
@@ -140,14 +146,21 @@ if __name__ == '__main__':
                     for a in ans:
                         print a.encode("utf8")
                         reply += a.encode("utf8")+'\n'
+
+                    # yang @2018.1.20
+                    reply = {'answer': reply, 'founded': true}
                     conn.send(reply)
                 else:
                     print 'Eric：' + ans[0].encode("utf8")
                     reply = ans[0].encode("utf8")
+                    # yang @2018.1.20
+                    reply = {'answer': reply, 'founded': true}
                     conn.send(reply)
 
             # 匹配模版
             else:
                 print 'Eric：' + response
                 reply = response
+                # yang @2018.1.20
+                reply = {'answer': reply, 'founded': true}
                 conn.send(reply)

@@ -114,7 +114,6 @@ def q(request):
     try:
 
         data = json_load(request.body)
-
         resp = qa_dispatcher(data)
         return response_write({'answer': resp})
     except:

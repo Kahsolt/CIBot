@@ -54,6 +54,7 @@ class QaBot(WXBot):
                 return
 
             if resp.get('answer'):
+
                 qid = resp.get('qid')
                 answer = resp.get('answer')
                 # print('this is a test message:')
@@ -61,12 +62,12 @@ class QaBot(WXBot):
                 # print('[A-AI] Bot answered [#%d]: %s' % (qid, answer[:30]))
                 reply = u'问题[#%d]的答案: \n%s' % (qid, answer)
                 self.send_msg_by_uid(reply, uid)
-            elif resp.get('helpers'):
-                qid = resp.get('qid')
-                helpers = resp.get('helpers') or []
-                reply = u'快来抢答问题啦OwO: \n[#%d] %s\n' % (qid, question)
-                for uid in helpers:
-                    self.send_msg_by_uid(reply, uid)
+                if resp.get('users'):
+                    qid = resp.get('qid')
+                    helpers = resp.get('users') or []
+                    reply = u'快来抢答问题啦OwO: \n[#%d] %s\n' % (qid, question)
+                    for helpers_id in helpers:
+                        self.send_msg_by_uid(reply, helpers_id)
             else:
                 reply = u'有问必答不知道，何况还是乱问的:o'
                 self.send_msg_by_uid(reply, uid)
@@ -130,8 +131,14 @@ class QaBot(WXBot):
         data = {'uid': uid, 'question': quest}
         try:
             resp = requests.post(URL_Q, json=data).json()
-            print('[Q] Got the response: %s' % resp)
-            return resp
+            #attention!!!
+            #I has no idea why resp's format is {answer{XXX}}!!!
+            resp = resp.get('answer')
+            if resp.get('user'):
+                pass
+            else:
+                print('[Q] Got the response: %s' % resp)
+                return resp
         except:
             print('[Q] You ask me, I ask whom?? :(')
             return None

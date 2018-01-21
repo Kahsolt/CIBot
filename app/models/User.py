@@ -25,7 +25,7 @@ class User(models.Model):
 
     def to_json(self):
         return {
-            'id': self.id,
+            'uid': self.uid,
             'username': self.username,
             'tags': [t.name for t in self.tags.all()]
         }
