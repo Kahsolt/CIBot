@@ -122,7 +122,14 @@ def q(request):
 
 @csrf_exempt
 def a(request):
-    return response_write(die(000))
+    try:
+
+        data = json_load(request.body)
+        resp = qa_callback(data)
+        print('uid is '+resp)
+        return response_write({'uid': resp})
+    except:
+        return response_write(die(000))
 
 
 # Browser-oriented Views

@@ -62,10 +62,12 @@ def find_user(que):
             except Exception as e:
                 print(e)
 
+        uid_list = []
         for i in range(len(user_list)):
             print(user_list[i].username + " " + str(cout_list[i]))
-        if len(user_list)>0:
-            return user_list
+            uid_list.append(user_list[i].uid)
+        if len(uid_list)>0:
+            return uid_list
     except Exception as e:
         print(e)
     print("over~")
@@ -75,7 +77,7 @@ def qa_dispatcher(data):
     quest = data.get('question')
     if not quest:
         return ''
-    #to do：判断q是否存在
+    # TODO：判断q是否存在
     # Save Question
     print("cibot get the question:"+quest)
     try:
@@ -93,9 +95,8 @@ def qa_dispatcher(data):
     # t = threading.Thread(target=qa_snake, args=(data.get('question'),))
     # t.setDaemon(True)
     # t.start()
-    #To do:是否有类似问题？
+    # Todo:是否有类似问题？
     #if not
-
     answer = qa_snake(data.get('question'))
     if answer != 'NO ANSWER':
         resp = {'qid':q.qid,'answer':answer}
@@ -104,14 +105,14 @@ def qa_dispatcher(data):
         print("qa_snake give no answer")
         users = find_user(data.get('question'))
         if users :
-            resp = {'qid':q.qid,'user':users}
+            resp = {'qid':q.qid,'users':users}
         else:
             resp = {'qid': q.qid}
 
     # dispatch local-DB
 
     # dispatch CI
-
+    print(resp)
     return resp
 
 
@@ -130,6 +131,19 @@ def qa_snake(kw):
         print(e)
         return None
 
+def qa_callback(data):
+    print("here")
+    try:
+        qid = data.get('qid')
+        answer = data.get('answer')
+        uid = data.get('uid')
+        Answer.update_answerlist(data)
+        uid = Question.get_uid_byqid(qid)
+        print("hereB" + uid)
+        return uid
+    except Exception as e:
+        print(e.message)
+    return
 
 # Section B 语法糖 Wrapper
 def response_write(jsonData):

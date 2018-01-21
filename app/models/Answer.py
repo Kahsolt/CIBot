@@ -7,6 +7,7 @@ from .Question import Question
 # [答案] ->[用户]|[问题]
 class Answer(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, help_text='答主|为空时意为搜索引擎',on_delete=models.CASCADE)
+    #TODO xian ran qid bing bushi qid danshi wo lan!
     qid = models.ForeignKey(Question, help_text='对应的问题',on_delete=models.CASCADE)
     content = models.TextField(help_text='答案内容')
     isBest = models.BooleanField(help_text='是否最佳')
@@ -24,8 +25,10 @@ class Answer(models.Model):
         try:
             u = User.objects.get(uid = dist['uid'])
             q = Question.objects.get(qid = dist['qid'])
-            a, created = Answer.objects.get_or_create(user=u, content=dist['answer'], question0=q)
-        except:
+            a, created = Answer.objects.get_or_create(user=u, content=dist['answer'], qid=q, isBest = True)
+        except Exception as e:
+            print(dist)
+            print(e)
             print("poinson")
 
     @classmethod
