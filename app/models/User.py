@@ -17,7 +17,6 @@ class User(models.Model):
     email = models.EmailField(null=True, blank=True)
     phone = models.CharField(null=True, blank=True, max_length=11)
     tags = models.ManyToManyField(Tag)
-
     create_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -132,6 +132,9 @@ if __name__ == '__main__':
                     ans = mybot.respond('找不到答案')
                     print 'Eric：' + ans
                     reply = ans
+
+                    # 2018.1.21 @yang
+                    reply = 'NO ANSWER'
                     conn.send(reply)
 
                 elif len(ans) >1:

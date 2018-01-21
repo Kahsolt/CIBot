@@ -56,9 +56,7 @@ class QaBot(WXBot):
                 reply = u'可能不在服务区?'
                 self.send_msg_by_uid(reply, uid)
                 return
-
             if resp.get('answer'):
-
                 qid = resp.get('qid')
                 answer = resp.get('answer')
                 # print('this is a test message:')
@@ -152,7 +150,7 @@ class QaBot(WXBot):
             return None
 
     def send_answer(self, uid, qid, ans):
-        data = {'uid': uid, 'qid': qid, 'anwser': ans}
+        data = {'uid': uid, 'qid': qid, 'answer': ans}
         try:
             resp = requests.post(URL_A, json=data).json()
             print('[A-CI] Got the response: %s' % resp)
