@@ -95,11 +95,8 @@ if __name__ == '__main__':
                 ans = mybot.respond('找不到答案')
                 print 'Eric：' + ans
                 reply = mybot.respond('找不到答案')
-
-                #yang @2018.1.20
-                reply = {'answer':reply,'founded':false}
-                conn.send(reply)
-
+                #2018.1.21 @yang
+                conn.send('NO ANSWER')
             # 百科搜索
             elif response[0] == '#':
                 # 匹配百科
@@ -135,9 +132,6 @@ if __name__ == '__main__':
                     ans = mybot.respond('找不到答案')
                     print 'Eric：' + ans
                     reply = ans
-
-                    # yang @2018.1.20
-                    reply = {'answer':reply,'founded':true}
                     conn.send(reply)
 
                 elif len(ans) >1:
@@ -146,21 +140,14 @@ if __name__ == '__main__':
                     for a in ans:
                         print a.encode("utf8")
                         reply += a.encode("utf8")+'\n'
-
-                    # yang @2018.1.20
-                    reply = {'answer': reply, 'founded': true}
                     conn.send(reply)
                 else:
                     print 'Eric：' + ans[0].encode("utf8")
                     reply = ans[0].encode("utf8")
-                    # yang @2018.1.20
-                    reply = {'answer': reply, 'founded': true}
                     conn.send(reply)
 
             # 匹配模版
             else:
                 print 'Eric：' + response
                 reply = response
-                # yang @2018.1.20
-                reply = {'answer': reply, 'founded': true}
                 conn.send(reply)
