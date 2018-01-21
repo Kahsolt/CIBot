@@ -58,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/utils/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="97" column="4" lean-forward="false" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="4" />
+            <state relative-caret-position="411">
+              <caret line="108" column="33" lean-forward="true" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -71,8 +71,8 @@
       <file leaf-file-name="wxbot_adapter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/wxBot/wxbot_adapter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-228">
-              <caret line="67" column="34" lean-forward="true" selection-start-line="67" selection-start-column="34" selection-end-line="67" selection-end-column="34" />
+            <state relative-caret-position="258">
+              <caret line="64" column="35" lean-forward="true" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -81,8 +81,8 @@
       <file leaf-file-name="wxbot.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/wxBot/wxbot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="1000" column="13" lean-forward="false" selection-start-line="1000" selection-start-column="13" selection-end-line="1000" selection-end-column="13" />
+            <state relative-caret-position="-2046">
+              <caret line="1004" column="18" lean-forward="true" selection-start-line="1004" selection-start-column="18" selection-end-line="1004" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -111,8 +111,8 @@
       <file leaf-file-name="MainProgram.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/QA-Snake/QA/MainProgram.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="109" column="33" lean-forward="true" selection-start-line="109" selection-start-column="33" selection-end-line="109" selection-end-column="33" />
+            <state relative-caret-position="1962">
+              <caret line="110" column="35" lean-forward="true" selection-start-line="110" selection-start-column="35" selection-end-line="110" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -138,11 +138,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/QA-Snake/QA/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1069">
-              <caret line="70" column="20" lean-forward="true" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+            <state relative-caret-position="299">
+              <caret line="133" column="31" lean-forward="false" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -164,8 +164,8 @@
       <find>malfor</find>
       <find>send_contact_book</find>
       <find>stoplist</find>
-      <find>send_qu</find>
       <find>send_question</find>
+      <find>send_qu</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -229,9 +229,9 @@
         <option value="$PROJECT_DIR$/app/utils/tfidfcn.py" />
         <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/app/models/User.py" />
-        <option value="$PROJECT_DIR$/lib/QA-Snake/QA/server.py" />
-        <option value="$PROJECT_DIR$/lib/wxBot/wxbot_adapter.py" />
         <option value="$PROJECT_DIR$/app/utils/__init__.py" />
+        <option value="$PROJECT_DIR$/lib/wxBot/wxbot_adapter.py" />
+        <option value="$PROJECT_DIR$/lib/QA-Snake/QA/server.py" />
       </list>
     </option>
   </component>
@@ -926,14 +926,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/QA-Snake/QA/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-223">
@@ -942,10 +934,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/QA-Snake/QA/MainProgram.py">
+    <entry file="file://$PROJECT_DIR$/lib/QA-Snake/QA/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="109" column="33" lean-forward="true" selection-start-line="109" selection-start-column="33" selection-end-line="109" selection-end-column="33" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/utils/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="108" column="33" lean-forward="true" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -958,34 +958,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/QA-Snake/QA/server.py">
+    <entry file="file://$PROJECT_DIR$/app/models/Question.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1069">
-          <caret line="70" column="20" lean-forward="true" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/wxBot/wxbot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="1000" column="13" lean-forward="false" selection-start-line="1000" selection-start-column="13" selection-end-line="1000" selection-end-column="13" />
+        <state relative-caret-position="213">
+          <caret line="18" column="40" lean-forward="false" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/wxBot/wxbot_adapter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-228">
-          <caret line="67" column="34" lean-forward="true" selection-start-line="67" selection-start-column="34" selection-end-line="67" selection-end-column="34" />
+        <state relative-caret-position="258">
+          <caret line="64" column="35" lean-forward="true" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Question.py">
+    <entry file="file://$PROJECT_DIR$/lib/wxBot/wxbot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="18" column="40" lean-forward="false" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
+        <state relative-caret-position="-2046">
+          <caret line="1004" column="18" lean-forward="true" selection-start-line="1004" selection-start-column="18" selection-end-line="1004" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -998,10 +990,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/utils/__init__.py">
+    <entry file="file://$PROJECT_DIR$/lib/QA-Snake/QA/MainProgram.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="97" column="4" lean-forward="false" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="4" />
+        <state relative-caret-position="1962">
+          <caret line="110" column="35" lean-forward="true" selection-start-line="110" selection-start-column="35" selection-end-line="110" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/QA-Snake/QA/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="133" column="31" lean-forward="false" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
           <folding />
         </state>
       </provider>

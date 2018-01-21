@@ -95,19 +95,18 @@ def qa_dispatcher(data):
     # t.start()
     #To do:是否有类似问题？
     #if not
-    
-    snake_re = qa_snake(data.get('question'))
-    #
-    if snake_re.get('founded'):
-        resp = {'qid':q.qid,'answer':snake_re.get('answer')}
+
+    answer = qa_snake(data.get('question'))
+    if answer != 'NO ANSWER':
+        resp = {'qid':q.qid,'answer':answer}
         return resp
     else:
         print("qa_snake give no answer")
         users = find_user(data.get('question'))
         if users :
-            resp = {'qid':q.qid,'answer':snake_re.get('answer'),'user':users}
+            resp = {'qid':q.qid,'user':users}
         else:
-            resp = {'qid': q.qid, 'answer': snake_re.get('answer')}
+            resp = {'qid': q.qid}
 
     # dispatch local-DB
 
