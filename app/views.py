@@ -19,14 +19,14 @@ from app.scheds import *
 @csrf_exempt
 def user(request):
     try:
-        User.objects.filter(uid = r'^@').delete()
-        Tag.object.filter(name = 'doctor').delete()
-        Tag.object.filter(name = 'patient').delete()
+        User.objects.filter(uid__contains = '@').delete()
+        Tag.objects.filter(name = 'doctor').delete()
+        Tag.objects.filter(name = 'patient').delete()
     except:
         pass
     try:
-        Tag.object.get_or_create(name = 'doctor')
-        Tag.object.get_or_create(name = 'patient')
+        d, created = Tag.objects.get_or_create(name = 'doctor', father = 'doctor', son = 'doctor')
+        p, created = Tag.objects.get_or_create(name = 'patient', father = 'patient', son = 'patient')
         us = request.body
         us = eval(json_load(us))
         us = us['users']
@@ -34,9 +34,11 @@ def user(request):
             uid = u['id']
             uname = u['nickname']
             if 'doctor' in uid:
-                u = User.objects.get_or_create(uid=uid, username = uname, tags = Tag.object.get(name = 'doctor'))
+                u1, created = User.objects.get_or_create(uid=uid, username = uname)
+                u1.tags.add(d)
             else:
-                u = User.objects.get_or_create(uid=uid, username=uname, tags=Tag.object.get(name='patient'))
+                u1, created = User.objects.get_or_create(uid=uid, username = uname)
+                u1.tags.add(p)
 
         # uid = request.session.get('id')
         # u = User.objects.get_or_create(uid=uid)
@@ -45,7 +47,8 @@ def user(request):
         #     return response_write(u.to_json())
         # else:
         #     return response_write(die(404))
-    except:
+    except Exception as e:
+        print(e)
         return response_write(die(401))
 
 
@@ -128,8 +131,10 @@ def q(request):
         data = json_load(request.body)
         resp = qa_dispatcher(data)
         return response_write({'answer': resp})
-    except:
+    except Exception as e:
+        print(e)
         return response_write(die(400))
+
 
 
 @csrf_exempt

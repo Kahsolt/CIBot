@@ -49,7 +49,7 @@ def jieba_search(input_content):
 
 # 使用tfidf寻找对应问题的答案
 # 输入字符串，如果无相似度高于阈值的答案则返回空字符串，否则返回库中答案
-def tfidf_search(raw_input, top = 1,threshold = 0.5):
+def tfidf_search(raw_input, top = 1,threshold = 0.55):
     # logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
     model = models.TfidfModel.load(MODEL_PATH)
     corpus = corpora.MmCorpus(CORPUS_PATH)

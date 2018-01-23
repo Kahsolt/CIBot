@@ -8,7 +8,7 @@ from django.conf import settings
 from django.shortcuts import HttpResponse
 from CIBot.settings import QASNAKE_HOST, QASNAKE_PORT
 from app.models import *
-from utils.tfidfcn import tfidf_search
+from app.utils.tfidfcn import tfidf_search
 
 logger = logging.getLogger("django")
 
@@ -63,10 +63,12 @@ def find_user(que):
             except Exception as e:
                 print(e)
 
+        uid_list = []
         for i in range(len(user_list)):
             print(user_list[i].username + " " + str(cout_list[i]))
-        if len(user_list)>0:
-            return user_list
+            uid_list.append(user_list[i].uid)
+        if len(uid_list)>0:
+            return uid_list
     except Exception as e:
         print(e)
     print("over~")
@@ -94,31 +96,29 @@ def qa_dispatcher(data):
     # t = threading.Thread(target=qa_snake, args=(data.get('question'),))
     # t.setDaemon(True)
     # t.start()
-    # Todo:是否有类似问题？
+    # 查找是否有类似问题？
 
-    # res = tfidf_search()
-    # if (res == ''): #未找到
-    #     print("数据库中不存在相似答案")
-    # else: #找到答案,返回res为答案内容,格式为字符串
-    #     print(res)
-    
-    snake_re = qa_snake(data.get('question'))
-    #
-    if snake_re.get('founded'):
-        resp = {'qid':q.qid,'answer':snake_re.get('answer')}
+    res = tfidf_search(quest)
+    if (res != ''): #未找到
+        resp = {'qid': q.qid, 'answer': res}
+        return resp
+
+    answer = qa_snake(data.get('question'))
+    if answer != 'NO ANSWER':
+        resp = {'qid':q.qid,'answer':answer}
         return resp
     else:
         print("qa_snake give no answer")
         users = find_user(data.get('question'))
         if users :
-            resp = {'qid':q.qid,'answer':snake_re.get('answer'),'user':users}
+            resp = {'qid':q.qid,'users':users}
         else:
-            resp = {'qid': q.qid, 'answer': snake_re.get('answer')}
+            resp = {'qid': q.qid}
 
     # dispatch local-DB
 
     # dispatch CI
-
+    print(resp)
     return resp
 
 def qa_snake(kw):
@@ -139,6 +139,18 @@ def response_write(jsonData):
     response = HttpResponse(json.dumps(jsonData, ensure_ascii=False))
     return response
 
+def qa_callback(data):
+    print("here")
+    try:
+        qid = data.get('qid')
+        answer = data.get('answer')
+        uid = data.get('uid')
+        Answer.update_answerlist(data)
+        uid = Question.get_uid_byqid(qid)
+        return uid
+    except Exception as e:
+        print(e)
+    return
 
 def json_load(byteData):
     try:

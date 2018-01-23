@@ -37,6 +37,7 @@ class Question(models.Model):
             if q[0]:
                 return q[0].id
         return False
+
     def get_uid_byqid(qid):
         try:
             q = Question.objects.get(qid = qid)
@@ -46,6 +47,7 @@ class Question(models.Model):
             print("NO SUCH QUESTION:QID = " + qid)
             return False
         return None
+
     @classmethod
     def update_questionlist(cls, dist):
         u = User.objects.get(uid = dist['uid'])

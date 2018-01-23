@@ -18,6 +18,7 @@ case "$1" in
         screen -dmS QA-Snake $PY2 QA/server.py
 		cd $WXBOT_HOME
 		screen -dmS wxBot $PY2 wxbot_adapter.py
+		screen -r wxBot
         cd $CIBOT_HOME
         screen -dmS Django-CIBot $PY3 manage.py runserver
         sleep 1
